@@ -45,7 +45,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
 
                 page.insert_font(fontfile=fontpath, fontname=fontname)
 
-                print(f"Title: {japanese_title}")
+                
                 # キービジュアルを挿入（PNG形式を直接使用）
                 if os.path.exists(key_visual_url):
                     pixmap = fitz.Pixmap(key_visual_url)
@@ -57,17 +57,40 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
                 else:
                     print(f"Warning: Key visual file not found at {key_visual_url}")
 
-                text_block = f"{japanese_title}"
+                # 日本語タイトルと英語タイトルを挿入
+                print(f"Title: {japanese_title}")
+                text_block_japanese = f"{japanese_title}"
+                text_block_english = f"{english_title}"
                 # 60文字ごとに改行、改行が必要な場合はy＝y+20
                 title_gap = 0
-                if len(text_block) > 90:
-                    title_gap = 20
+                if len(text_block_japanese) > 90:
+                    title_gap += 20
+                if len(text_block_english) > 90:
+                    title_gap += 20
+                text_rect_japanese = fitz.Rect(40, 40, 850, 90 + title_gap)
+                page.insert_textbox(
+                        text_rect_japanese,
+                        text_block_japanese,
+                        fontsize=18,
+                        fontname=fontname,
+                        fontfile=fontpath
+                    )
+
+                text_rect_english = fitz.Rect(40, 10 + title_gap, 850, 40 + title_gap)
+                page.insert_textbox(
+                    text_rect_english,
+                    text_block_english,
+                    fontsize=16,
+                    fontname=fontname,
+                    fontfile=fontpath
+                )
+                
 
                 text_rect = fitz.Rect(40, 40, 850, 90 + title_gap)
                 page.insert_text(fitz.Point(40, 90 + title_gap), f"{authors}", fontsize=14, fontname=fontname)
                 summary_rect = fitz.Rect(40, 130 + title_gap, 900, 170 + title_gap)
 
-                page.insert_textbox(text_rect, text_block, fontsize=18, fontname=fontname, fontfile=fontpath)
+                #page.insert_textbox(text_rect, text_block, fontsize=18, fontname=fontname, fontfile=fontpath)
                 page.insert_textbox(summary_rect, f"{summary_japanese}", fontsize=14, fontname=fontname, fontfile=fontpath)
 
                 # ペーパーリンクをハイパーリンクとして追加
