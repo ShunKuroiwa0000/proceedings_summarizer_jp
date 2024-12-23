@@ -63,7 +63,7 @@ def main():
                     if re.search(r"[a-zA-Z\u4E00-\u9FFF]", text_list[k]) != None:
 
                         title = text_list[k] + text_list[k+1]
-                        title = remove_non_ascii(title)
+                        #title = remove_non_ascii(title)
                         break
                 print(title)
                 

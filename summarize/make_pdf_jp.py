@@ -8,7 +8,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
     cursor = conn.cursor()
 
     # データベースから情報を取得
-    cursor.execute("SELECT english_title, authors, paper_link, key_visual_url, summary_japanese, problem_japanese, method_japanese, results_japanese FROM pdf_summaries")
+    cursor.execute("SELECT japanese_title,authors, paper_link, key_visual_url, summary_japanese, problem_japanese, method_japanese, results_japanese FROM pdf_summaries")
     summaries = cursor.fetchall()
 
     # テンプレートPDFを読み込み
@@ -36,7 +36,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
                     break
 
                 summary = summaries[count]
-                english_title, authors, paper_link, key_visual_url, summary_japanese, problem, method, results = summary
+                japanese_title,authors, paper_link, key_visual_url, summary_japanese, problem, method, results = summary
 
                 # テンプレートのページを複製して新しいページを作成
                 template_page = template_pdf[0]  # テンプレートの最初のページ
@@ -45,7 +45,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
 
                 page.insert_font(fontfile=fontpath, fontname=fontname)
 
-                print(f"Title: {english_title}")
+                print(f"Title: {japanese_title}")
                 # キービジュアルを挿入（PNG形式を直接使用）
                 if os.path.exists(key_visual_url):
                     pixmap = fitz.Pixmap(key_visual_url)
@@ -57,7 +57,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
                 else:
                     print(f"Warning: Key visual file not found at {key_visual_url}")
 
-                text_block = f"{english_title}"
+                text_block = f"{japanese_title}"
                 # 60文字ごとに改行、改行が必要な場合はy＝y+20
                 title_gap = 0
                 if len(text_block) > 90:
@@ -107,7 +107,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
 
         for summary in summaries:
             count += 1
-            english_title, authors, paper_link, key_visual_url, summary_japanese, problem, method, results = summary
+            english_title, japanese_title,authors, paper_link, key_visual_url, summary_japanese, problem, method, results = summary
 
             # テンプレートのページを複製して新しいページを作成
             template_page = template_pdf[0]  # テンプレートの最初のページ
@@ -116,7 +116,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
 
             page.insert_font(fontfile=fontpath, fontname=fontname)
 
-            print(f"Title: {english_title}")
+            print(f"Title: {japanese_title}")
             # キービジュアルを挿入（PNG形式を直接使用）
             if os.path.exists(key_visual_url):
                 pixmap = fitz.Pixmap(key_visual_url)

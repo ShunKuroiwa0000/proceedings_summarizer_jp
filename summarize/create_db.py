@@ -20,8 +20,11 @@ def extract_text_from_pdf(pdf_path):
     """Extracts text from a PDF file using PyMuPDF. 2ページに限定"""
     doc = fitz.open(pdf_path)
     text = ""
+    # ページ数を確認
+    total_pages = len(doc)
+    pages_to_read = min(2, total_pages)  # 最大2ページ
     # 最初の２ページのみを抽出
-    for page_num in range(2):
+    for page_num in range(pages_to_read):
         page = doc.load_page(page_num)
         text += page.get_text()
     
@@ -31,7 +34,7 @@ def extract_text_from_pdf(pdf_path):
 def get_summary_from_openai(text_content, path):
     """Sends text to the OpenAI Completion API and gets a summary based on detailed requirements."""
     detailed_prompt = (
-        f"このPDFに関して、以下の項目について、抽出もしくは翻訳や要約をして、まとめてください。各項目はそれぞれについている制約条件（文字数制限や言語、カンマ区切りなどの形式）を遵守してください。また、概要も省略せず抽出してください。概要や要約では引用符は使用しないでください。万が一概要中にダブルクオテーションがあれば、誤動作の原因になるので、シングルクオテーションに置き換えてください。なお、ダブルクオテーションとカンマのセットで項目を切り分けているので、形式は死守してください。\n"
+        f"このPDFに関して、以下の項目について、抽出もしくは翻訳や要約をして、まとめてください。各項目はそれぞれについている制約条件（文字数制限や言語、カンマ区切りなどの形式）を遵守してください。また、概要も省略せず抽出してください。概要や要約では引用符は使用しないでください。万が一概要中にダブルクオテーションがあれば、誤動作の原因になるので、シングルクオテーションに置き換えてください。なお、ダブルクオテーションとカンマのセットで項目を切り分けているので、形式は死守してください。ただし，英語のタイトルがないものについては空白を1つ挿入しなさい．\n"
         "```\n"
         "[\"タイトル（英語）\", \"タイトル（日本語）\", \"著者A, 著者B, 著者C\", \"2022（出版年）\", \"学会/ジャーナル/データベース\", \"10.1145/3544548.3581008（DOI）\", \"サマリー（英語 50ワード以内）\", \"サマリー（日本語 80字以内）\", \"概要（原文）\", \"キーワード（日本語）A, B, C\", \"課題（日本語 180字以内）\", \"手法（日本語 180字以内）\", \"結果（日本語 180字以内）\", \"キーワード（英語）A, B, C\", \"課題（英語 100字以内）\", \"手法（英語 100字以内）\", \"結果（英語 100字以内）\", \"https://doi.org/10.1145/3544548.3581008(論文リンク)\"]\n"
         "```"
@@ -41,7 +44,7 @@ def get_summary_from_openai(text_content, path):
     try:
         print("Sending request to OpenAI API...")
         summary = openai.ChatCompletion.create(
-            model="gpt-4-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {'role': 'system', 'content': detailed_prompt},
                 {'role': 'user', 'content': text_content}
