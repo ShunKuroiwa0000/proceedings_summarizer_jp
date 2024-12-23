@@ -25,7 +25,7 @@ def create_summary_pdfs(database_path, template_path, output_dir='output', langu
     count = 0
     total = len(summaries)
     file_index = 1
-
+    #
     if split_files:
         while count < total:
             # 新しいPDFドキュメントを作成
