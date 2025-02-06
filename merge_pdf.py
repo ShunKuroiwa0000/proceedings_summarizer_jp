@@ -1,3 +1,11 @@
+##フォルダ内の全PDFファイルを結合するスクリプト
+# 使い方: python merge_pdf.py <path_to_pdf_folder>
+# 例: python merge_pdf.py "C:\Users\Documents\proceedings_short"]
+# このスクリプトは、指定されたフォルダ内の全PDFファイルを結合して、
+# 同じフォルダに"merged.pdf"という名前で保存します。
+# このスクリプトは、PyPDF2ライブラリを使用しています。
+# PyPDF2は、pipを使用してインストールできます。
+
 import PyPDF2 as pp2
 import glob
 import sys

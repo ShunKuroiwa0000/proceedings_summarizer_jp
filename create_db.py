@@ -5,7 +5,6 @@ import concurrent.futures
 import time
 import fitz  # PyMuPDF to extract text from PDF
 import sqlite3
-import openai
 import concurrent.futures
 import threading
 import time
