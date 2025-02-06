@@ -1,9 +1,9 @@
 ## 開発源
 https://github.com/ShotaImamura/Proceedings-summarizer/blob/main
 
-これを日本語のProceedingsでも利用可能にしたもの．
-文字コードをShift-JISに変更．
-モデルは好きなモデル使ってください．
+これを日本語のProceedingsでも利用可能にしたもの．  
+文字コードをShift-JISに変更．  
+モデルは好きなモデル使ってください．  
 
 ## システムの用途
 ACM等の学会のプロシーディングスを各研究１ページの紹介スライドにまとめるコードです
@@ -29,9 +29,9 @@ Parse_jp.py及びParse_en.pyについて，Proceedingsに併せて以下の箇�
 ```bash
 if any(keyword in text.lower() for keyword in ["ABSTRACT"]) or i == pdf.page_count - 1:
 ```
-現在ABSTRACTとなっているところ，各論文につき必ず一つだけ入っている単語に変えてください．
-日本語だと概要，要約，辺りだとおもいます．
-ここを変更しないと，論文ごとにデータが分けられないので，うまく機能しません．
+現在ABSTRACTとなっているところ，各論文につき必ず一つだけ入っている単語に変えてください．  
+日本語だと概要，要約，辺りだとおもいます．  
+ここを変更しないと，論文ごとにデータが分けられないので，うまく機能しません．  
 
 
 
