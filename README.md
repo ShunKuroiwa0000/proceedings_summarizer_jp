@@ -95,5 +95,19 @@ Error in inserting data: Incorrect number of bindings supplied.
 python make_pdf_jp.py  # 日本語の要約PDFを作成する場合。日本語版はoutputディレクトリに、全論文を要約したPDFと（デフォルトでは）100ページ毎に分割したPDF群が出力されます。
 ```
 
+### 追加機能
+'merge_pdf.py'
+Proceedingsではなくいくつかのばらばらの論文をまとめてスライドにしたいとき，それらの論文をまとめて  
+一つのpdfファイルにまとめている．論文誌がなく，それぞれが単体の論文が発行されている場合に利用する．
+
+```bash
+python merge_pdf.py
+```
+
+### 現状の課題
+- 毎回dataフォルダ，outputフォルダを削除する必要あり．
+- 図やグラフの抽出はまだいまいち．
+
+
 
 
