@@ -1,4 +1,4 @@
-##開発源
+## 開発源
 https://github.com/ShotaImamura/Proceedings-summarizer/blob/main/README.md
 これを日本語のProceedingsでも利用可能にしたもの．
 文字コードをShift-JISに変更．
