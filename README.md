@@ -101,7 +101,7 @@ Proceedingsではなくいくつかのばらばらの論文をまとめてスラ
 一つのpdfファイルにまとめている．論文誌がなく，それぞれが単体の論文が発行されている場合に利用する．  
 
 ```bash
-python merge_pdf.py
+python merge_pdf.py <folder_path>
 ```
 
 ### 現状の課題
