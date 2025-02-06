@@ -3,6 +3,7 @@ https://github.com/ShotaImamura/Proceedings-summarizer/blob/main
 
 これを日本語のProceedingsでも利用可能にしたもの．
 文字コードをShift-JISに変更．
+モデルは好きなモデル使ってください．
 
 ## システムの用途
 ACM等の学会のプロシーディングスを各研究１ページの紹介スライドにまとめるコードです
@@ -48,6 +49,7 @@ export OPENAI_API_KEY="your_openai_api_key"  # Windowsの場合は `set OPENAI_A
 # 3.1 parse.pyの実行
 日本語のProceedingsを要約する場合，
 python parse_jp.py <pdf file name>
+
 英語のProceedingsを要約する場合
 python parse_en.py <pdf file name>
 
@@ -74,7 +76,7 @@ Error in inserting data: Incorrect number of bindings supplied.
 すでに要約済みのものはスキップした上で、正常に完了していない研究についての要約をデータベースに追加します。
 
 ### 5. 論文要約PDFの作成
-`make_pdf_jp.py`もしくは`make_pdf_en.py`を実行して、論文の要約PDFを作成します。
+`make_pdf_jp.py`を実行して、論文の要約PDFを作成します。
 
 ```bash
 python make_pdf_jp.py  # 日本語の要約PDFを作成する場合。日本語版はoutputディレクトリに、全論文を要約したPDFと（デフォルトでは）100ページ毎に分割したPDF群が出力されます。
